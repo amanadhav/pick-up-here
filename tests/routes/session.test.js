@@ -73,7 +73,7 @@ describe('POST /api/session/resume', () => {
 });
 
 describe('POST /api/session/confirm', () => {
-  it('3. answer yes on charger step → checklist shows step confirmed', async () => {
+  it('3. marking the charger done advances past its earlier photo observation', async () => {
     // Use agent from prior test (already has progress from test 1)
     const confirmRes = await agent
       .post('/api/session/confirm')
@@ -83,6 +83,8 @@ describe('POST /api/session/confirm', () => {
     const chargerEntry = confirmRes.body.checklist.find((c) => c.stepId === 'step_3');
     expect(chargerEntry).toBeDefined();
     expect(chargerEntry.confirmation).toBe('yes');
+    expect(chargerEntry.conflict).toBe(false);
+    expect(confirmRes.body.nextResult.stepId).toBe('step_4');
   });
 
   it('4. answer no → nextResult type action to pack it', async () => {

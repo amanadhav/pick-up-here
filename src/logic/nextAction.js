@@ -20,7 +20,7 @@ function nextAction({ steps, observations = {}, confirmations = {}, conflicts = 
       return {
         type: 'conflict',
         stepId: step.id,
-        message: `You confirmed this step but the photo suggests otherwise. Did you pack ${step.action}? You can keep your answer, correct it, or say not sure.`,
+        message: `You confirmed this step but the photo suggests otherwise. Check this step: “${step.action}”. Is it done?`,
       };
     }
   }
@@ -34,55 +34,43 @@ function nextAction({ steps, observations = {}, confirmations = {}, conflicts = 
     if (confirmation === 'yes') continue;
     if (!confirmation && observation?.status === 'in_bag') continue;
 
+    const item = step.action.match(/^(?:Pack|Put)\s+(.+?)(?:\s+in the bag)?[.!?]?$/i)?.[1];
+
     // Found an unresolved step — determine message
     if (confirmation === 'no') {
-      const item = step.action
-        .replace(/^Pack\s+/i, '')
-        .replace(/^Put\s+/i, '')
-        .replace(/\s+in the bag$/i, '');
       return {
         type: 'action',
         stepId: step.id,
-        message: `Pack the ${item} — you said it is not in the bag yet.`,
+        message: `${step.action} — you said it is not in the bag yet.`,
       };
     }
 
     if (confirmation === 'unsure') {
-      const item = step.action
-        .replace(/^Pack\s+/i, '')
-        .replace(/^Put\s+/i, '')
-        .replace(/\s+in the bag$/i, '');
       return {
         type: 'check',
         stepId: step.id,
-        message: `Check your bag for the ${item}. Try the main compartment and any side pockets.`,
+        message: item
+          ? `Check your bag for ${item}. Try the main compartment and any side pockets.`
+          : `Look at your bag and check whether this step is done: “${step.action}”.`,
       };
     }
 
     if (observation?.status === 'outside_bag') {
-      const item = step.action
-        .replace(/^Pack\s+/i, '')
-        .replace(/^Put\s+/i, '')
-        .replace(/\s+in the bag$/i, '');
       return {
         type: 'action',
         stepId: step.id,
-        message: `Pack the ${item} — it appears to be outside the bag.`,
+        message: `${step.action} — it appears to be outside the bag.`,
       };
     }
 
     // unclear or no observation
-    {
-      const item = step.action
-        .replace(/^Pack\s+/i, '')
-        .replace(/^Put\s+/i, '')
-        .replace(/\s+in the bag$/i, '');
-      return {
-        type: 'question',
-        stepId: step.id,
-        message: `Check your bag for the ${item}. Is it already inside?`,
-      };
-    }
+    return {
+      type: 'question',
+      stepId: step.id,
+      message: item
+        ? `Check your bag for ${item}. Is it already inside?`
+        : `Look at your bag. Is this step already done? “${step.action}”`,
+    };
   }
 
   // 4. All steps resolved

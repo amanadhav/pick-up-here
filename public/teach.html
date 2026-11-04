@@ -1,108 +1,108 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Teach a Routine — Pick Up Here</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f7f2">
+  <title>Teach a Routine | Pick Up Here</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="page-wrapper">
-
-    <header>
-      <h1>Pick Up Here</h1>
-      <p class="subtitle">Teach a routine</p>
-      <nav aria-label="Site navigation">
-        <a href="index.html">Home</a>
-        <a href="resume.html">Resume a Task</a>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 4h7a2 2 0 0 1 2 2v14l-4-3-4 3V6a2 2 0 0 0-2-2Z"/>
+            <path d="m10.5 10.5 1.5 1.5 2.5-3"/>
+          </svg>
+        </span>
+        Pick Up Here
+      </a>
+      <nav class="site-nav" aria-label="Site navigation">
+        <a href="teach.html" aria-current="page">Teach</a>
+        <a href="resume.html">Resume</a>
       </nav>
-    </header>
+    </div>
+  </header>
+  <main class="page-wrapper workflow-page" id="main" tabindex="-1">
+    <div class="page-heading">
+      <p class="eyebrow"><span class="eyebrow-dot"></span> Teach</p>
+      <h1>Teach a routine</h1>
+      <p class="intro">Show how you pack your bag, one photo at a time. You can review and edit every step before saving.</p>
+    </div>
+    <div id="status-msg" class="status-area" aria-live="polite"></div>
 
-    <main>
+    <form id="teach-form" class="panel" novalidate>
+      <div class="panel-heading">
+        <h2>Add your photos</h2>
+        <p>Use four photos in the order you do the steps.</p>
+      </div>
 
-      <!-- Status / banner area -->
-      <div id="status-msg" role="alert" aria-live="polite"></div>
-
-      <!-- ── Upload form ─────────────────────────────────────── -->
-      <form id="teach-form" novalidate>
-
-        <p>Upload four photos that show each step of your routine, then click <strong>Generate Routine</strong>.</p>
-
-        <!-- Step 1 -->
+      <div class="photo-grid">
         <fieldset class="photo-slot">
-          <legend><span class="step-number">Step 1</span></legend>
+          <legend>Step 1</legend>
+          <label for="photo_0">Photo <span class="optional">(required)</span></label>
+          <input type="file" id="photo_0" name="photo_0" accept="image/*" aria-required="true">
+          <img id="preview_0" class="thumbnail" alt="Preview of step 1 photo" hidden>
 
-          <label for="photo_0">Photo for step 1 <span aria-hidden="true">(required)</span></label>
-          <input type="file" id="photo_0" name="photo_0" accept="image/*" aria-required="true" />
-          <img id="preview_0" class="thumbnail" alt="Preview of step 1 photo" hidden />
-
-          <label for="note_0" style="margin-top:0.75rem;">Short note (optional)</label>
-          <input type="text" id="note_0" name="note_0" placeholder="e.g. Put the textbook in first" />
+          <label class="field-spaced" for="note_0">Short note <span class="optional">(optional)</span></label>
+          <input type="text" id="note_0" name="note_0" placeholder="e.g. Put the laptop in the bag">
         </fieldset>
-
-        <!-- Step 2 -->
         <fieldset class="photo-slot">
-          <legend><span class="step-number">Step 2</span></legend>
+          <legend>Step 2</legend>
+          <label for="photo_1">Photo <span class="optional">(required)</span></label>
+          <input type="file" id="photo_1" name="photo_1" accept="image/*" aria-required="true">
+          <img id="preview_1" class="thumbnail" alt="Preview of step 2 photo" hidden>
 
-          <label for="photo_1">Photo for step 2 <span aria-hidden="true">(required)</span></label>
-          <input type="file" id="photo_1" name="photo_1" accept="image/*" aria-required="true" />
-          <img id="preview_1" class="thumbnail" alt="Preview of step 2 photo" hidden />
-
-          <label for="note_1" style="margin-top:0.75rem;">Short note (optional)</label>
-          <input type="text" id="note_1" name="note_1" placeholder="e.g. Add the pencil case" />
+          <label class="field-spaced" for="note_1">Short note <span class="optional">(optional)</span></label>
+          <input type="text" id="note_1" name="note_1" placeholder="e.g. Add the notebook">
         </fieldset>
-
-        <!-- Step 3 -->
         <fieldset class="photo-slot">
-          <legend><span class="step-number">Step 3</span></legend>
+          <legend>Step 3</legend>
+          <label for="photo_2">Photo <span class="optional">(required)</span></label>
+          <input type="file" id="photo_2" name="photo_2" accept="image/*" aria-required="true">
+          <img id="preview_2" class="thumbnail" alt="Preview of step 3 photo" hidden>
 
-          <label for="photo_2">Photo for step 3 <span aria-hidden="true">(required)</span></label>
-          <input type="file" id="photo_2" name="photo_2" accept="image/*" aria-required="true" />
-          <img id="preview_2" class="thumbnail" alt="Preview of step 3 photo" hidden />
-
-          <label for="note_2" style="margin-top:0.75rem;">Short note (optional)</label>
-          <input type="text" id="note_2" name="note_2" placeholder="e.g. Put the charger in the side pocket" />
+          <label class="field-spaced" for="note_2">Short note <span class="optional">(optional)</span></label>
+          <input type="text" id="note_2" name="note_2" placeholder="e.g. Put the charger in the side pocket">
         </fieldset>
-
-        <!-- Step 4 -->
         <fieldset class="photo-slot">
-          <legend><span class="step-number">Step 4</span></legend>
+          <legend>Step 4</legend>
+          <label for="photo_3">Photo <span class="optional">(required)</span></label>
+          <input type="file" id="photo_3" name="photo_3" accept="image/*" aria-required="true">
+          <img id="preview_3" class="thumbnail" alt="Preview of step 4 photo" hidden>
 
-          <label for="photo_3">Photo for step 4 <span aria-hidden="true">(required)</span></label>
-          <input type="file" id="photo_3" name="photo_3" accept="image/*" aria-required="true" />
-          <img id="preview_3" class="thumbnail" alt="Preview of step 4 photo" hidden />
-
-          <label for="note_3" style="margin-top:0.75rem;">Short note (optional)</label>
-          <input type="text" id="note_3" name="note_3" placeholder="e.g. Zip up and check nothing is left" />
+          <label class="field-spaced" for="note_3">Short note <span class="optional">(optional)</span></label>
+          <input type="text" id="note_3" name="note_3" placeholder="e.g. Add your headphones">
         </fieldset>
+      </div>
 
+      <div class="panel-actions">
         <button type="submit" id="generate-btn" class="btn-primary">Generate Routine</button>
+      </div>
+    </form>
 
-      </form>
-
-      <!-- ── Generated step cards (hidden until generate succeeds) ── -->
-      <section id="routine-preview" hidden aria-label="Generated routine preview">
-
-        <h2>Review and Edit Steps</h2>
-        <p>You can edit any step text before saving.</p>
-
-        <div id="step-cards"></div>
-
-        <div style="margin-top:1.5rem;">
-          <label for="routine-name">Routine name</label>
-          <input type="text" id="routine-name" placeholder="e.g. School bag morning routine" />
-        </div>
-
-        <button type="button" id="save-btn" class="btn-primary" style="margin-top:1rem;">Save Routine</button>
-
-      </section>
-
-    </main>
-
-    <a href="index.html" class="back-link">← Back to home</a>
-
-  </div><!-- /.page-wrapper -->
-
+    <section id="routine-preview" class="panel" hidden aria-labelledby="review-title">
+      <div class="panel-heading">
+        <h2 id="review-title" tabindex="-1">Review your steps</h2>
+        <p>Edit the instructions so they sound like something you’d say to yourself.</p>
+      </div>
+      <div id="step-cards" class="photo-grid"></div>
+      <div class="routine-name field-spaced">
+        <label for="routine-name">Routine name</label>
+        <input type="text" id="routine-name" placeholder="e.g. Pack for class">
+      </div>
+      <div class="panel-actions">
+        <button type="button" id="save-btn" class="btn-primary">Save Routine</button>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <span>Pick Up Here</span>
+    <span>Built for IBM Bobathon · AI for Good</span>
+  </footer>
   <script src="teach.js" defer></script>
 </body>
 </html>

@@ -121,6 +121,10 @@ router.post('/confirm', (req, res) => {
   session.confirmations[stepId] = answer;
 
   const { observations } = session.progress;
+  // The user just checked or completed the step after this photo was taken.
+  if (answer === 'yes' && observations[stepId]?.status === 'outside_bag') {
+    delete observations[stepId];
+  }
   const conflicts = detectConflicts(observations, session.confirmations);
 
   const nextResult = nextAction({

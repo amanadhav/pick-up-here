@@ -84,21 +84,21 @@ node scripts/live-inference-test.js
 
 **Resume with charger on desk:**
 1. Open http://localhost:3000/resume.html
-2. Click **Sample: Charger on desk** (this uses the saved routine automatically)
-3. See the result: **"Pack the charger — it is on the desk to the right"** as the next action
-4. The checklist shows Steps 1 and 2 as ✓ Packed, Step 3 as ✗ Missing
+2. Click **Charger on desk** (this uses the saved routine automatically)
+3. See the result: **Pack the laptop charger** as the next action, with the desk observation in the checklist
+4. The checklist shows Steps 1 and 2 as ✓ Packed, Step 3 as Not packed
 
 **Resume with charger out of view:**
 1. Click **Start New Session**
-2. Click **Sample: Charger out of view**
-3. See the question **"Check your bag for the laptop charger. Is it already inside?"** with Yes / No / I'm not sure buttons
+2. Click **Charger out of view**
+3. See the question **“Check your bag for the laptop charger. Is it already inside?”** with Yes / No / I'm not sure buttons
 
 **Confirm answers:**
-1. Click **No** → next action: "Pack the laptop charger — you said it is not in the bag yet."
+1. Click **No** → the next action updates to an instruction to pack the laptop charger.
 2. Click **Start New Session**
-3. Click **Sample: Charger out of view** again
-4. Click **Yes** → step marked complete; view advances to Step 4 ("Zip up the bag")
-5. Click **Start New Session**, click **Sample: Charger out of view** again, click **I'm not sure** → see: "Check your bag for the laptop charger. Try the main compartment and any side pockets."
+3. Click **Charger out of view** again
+4. Click **Yes** → the view advances to Step 4 ("Zip up the bag")
+5. Start a new session, choose **Charger out of view**, and click **I'm not sure** → the app suggests checking the main compartment and side pockets.
 
 **Start New Session:**
 1. Click **Start New Session** — the checklist resets, the routine stays available

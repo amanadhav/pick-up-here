@@ -50,7 +50,6 @@
     div.className = 'error-banner';
 
     var p = document.createElement('p');
-    p.style.margin = '0 0 0.5rem';
     p.textContent = message;
     div.appendChild(p);
 
@@ -81,7 +80,7 @@
 
     var p = document.createElement('p');
     p.textContent =
-      'Sample Mode — using fixture data. Add OPENAI_API_KEY to .env for live inference.';
+      'Sample Mode · These results come from a prepared example.';
     div.appendChild(p);
 
     var dismiss = document.createElement('button');
@@ -100,10 +99,8 @@
   function showConfirmation(message) {
     clearStatus();
     var div = document.createElement('div');
-    div.style.cssText =
-      'border:2px solid #1a7a3a;background:#e8f5ec;border-radius:4px;padding:1rem;margin-bottom:1rem;';
+    div.className = 'success-banner';
     var p = document.createElement('p');
-    p.style.margin = '0';
     p.textContent = message;
     div.appendChild(p);
     statusDiv.appendChild(div);
@@ -137,7 +134,7 @@
 
     if (item.confirmation === 'no') {
       badge.classList.add('badge-missing');
-      badge.textContent = '✗ Missing';
+      badge.textContent = 'Not packed';
       return badge;
     }
 
@@ -155,7 +152,7 @@
 
     if (item.observedStatus === 'outside_bag') {
       badge.classList.add('badge-missing');
-      badge.textContent = '✗ Missing';
+      badge.textContent = 'Not packed';
       return badge;
     }
 
@@ -176,15 +173,15 @@
     checklistItems.innerHTML = '';
 
     var packed = checklist.filter(function (item) {
-      return item.confirmation === 'yes' ||
-        (!item.confirmation && item.observedStatus === 'in_bag' && !item.conflict);
+      return !item.conflict && (item.confirmation === 'yes' ||
+        (!item.confirmation && item.observedStatus === 'in_bag'));
     }).length;
 
     checklistSummary.textContent =
       'Checklist (' + packed + ' of ' + checklist.length + ' packed)';
 
     checklist.forEach(function (item, idx) {
-      var row = document.createElement('div');
+      var row = document.createElement('li');
       row.className = 'checklist-item';
 
       var numSpan = document.createElement('span');
@@ -217,28 +214,34 @@
   function renderNextAction(nextResult) {
     nextActionBox.innerHTML = '';
 
-    if (nextResult.type === 'done') {
-      var doneP = document.createElement('p');
-      doneP.className = 'done-message';
-      doneP.textContent = '🎉 ' + nextResult.message;
-      nextActionBox.appendChild(doneP);
-      return;
-    }
+    nextActionBox.dataset.type = nextResult.type;
+
+    var headings = {
+      action: 'Up next',
+      question: 'Check your progress',
+      conflict: 'Check again',
+      check: 'Take a closer look',
+      done: 'Routine complete'
+    };
+    var heading = document.createElement('h2');
+    heading.className = 'eyebrow';
+    heading.textContent = headings[nextResult.type];
+    nextActionBox.appendChild(heading);
 
     var msgP = document.createElement('p');
     msgP.className = 'next-action-text';
     msgP.textContent = nextResult.message;
     nextActionBox.appendChild(msgP);
 
-    if (nextResult.type === 'question' || nextResult.type === 'conflict') {
+    if (nextResult.type !== 'done') {
       var btnsDiv = document.createElement('div');
-      btnsDiv.className = 'confirm-buttons';
+      btnsDiv.className = 'confirm-buttons button-group';
 
-      var answers = [
+      var answers = nextResult.type === 'question' || nextResult.type === 'conflict' ? [
         { label: 'Yes', value: 'yes' },
-        { label: 'No',  value: 'no' },
+        { label: 'No', value: 'no' },
         { label: "I'm not sure", value: 'unsure' }
-      ];
+      ] : [{ label: 'Mark step done', value: 'yes' }];
 
       answers.forEach(function (ans) {
         var btn = document.createElement('button');
@@ -267,15 +270,15 @@
     }
 
     // Move focus to next-action box for screen readers
-    nextActionBox.focus();
+    nextActionBox.focus({ preventScroll: true });
   }
 
   /* ── Ensure fixture routine is saved (for sample presets) ── */
   var fixtureSteps = [
-    { id: 'step_1', action: 'Put the textbook in the bag' },
-    { id: 'step_2', action: 'Put the notebook in the bag' },
-    { id: 'step_3', action: 'Pack the laptop charger' },
-    { id: 'step_4', action: 'Zip up the bag' }
+    { id: 'step_1', action: 'Put the textbook in the bag', photoRef: 0 },
+    { id: 'step_2', action: 'Put the notebook in the bag', photoRef: 1 },
+    { id: 'step_3', action: 'Pack the laptop charger', photoRef: 2 },
+    { id: 'step_4', action: 'Zip up the bag', photoRef: 3 }
   ];
 
   /**
@@ -335,7 +338,7 @@
       }
 
       analyseBtn.disabled = true;
-      analyseBtn.textContent = 'Analysing…';
+      analyseBtn.textContent = 'Checking your photo…';
       presetDeskBtn.disabled = true;
       presetUnclearBtn.disabled = true;
 
@@ -350,7 +353,7 @@
         })
         .then(function (result) {
           analyseBtn.disabled = false;
-          analyseBtn.textContent = 'Analyse';
+          analyseBtn.textContent = 'Find my next step';
           presetDeskBtn.disabled = false;
           presetUnclearBtn.disabled = false;
           pendingPreset = null;
@@ -364,11 +367,11 @@
           }
 
           renderResult(result.data);
-          resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          resultSection.scrollIntoView({ block: 'start' });
         })
         .catch(function (err) {
           analyseBtn.disabled = false;
-          analyseBtn.textContent = 'Analyse';
+          analyseBtn.textContent = 'Find my next step';
           presetDeskBtn.disabled = false;
           presetUnclearBtn.disabled = false;
           pendingPreset = null;
@@ -460,7 +463,7 @@
         resumePhotoPreview.hidden = true;
         resumePhotoPreview.src = '';
         clearStatus();
-        selectSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        selectSection.scrollIntoView({ block: 'start' });
         routineSelect.focus();
       })
       .catch(function (err) {
@@ -492,7 +495,7 @@
 
         populateRoutines();
         showConfirmation('All session data cleared.');
-        selectSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        selectSection.scrollIntoView({ block: 'start' });
       })
       .catch(function (err) {
         showError('Network error: ' + err.message, null);
@@ -518,18 +521,14 @@
           routineSelect.appendChild(opt);
         });
 
-        // Show sample presets when no routines are saved
-        if (routines.length === 0) {
-          samplePresets.hidden = false;
-        } else {
-          samplePresets.hidden = true;
+        if (routines.length === 1) {
+          routineSelect.value = routines[0].id;
         }
 
         return routines;
       })
       .catch(function () {
-        // Non-fatal — show sample presets as fallback
-        samplePresets.hidden = false;
+        showError('Could not load your routines. Please reload this page.', null);
         return [];
       });
   }
@@ -539,6 +538,7 @@
     return fetch('/api/session/state')
       .then(function (res) { return res.json(); })
       .then(function (data) {
+        samplePresets.hidden = data.mode !== 'sample';
         if (data.nextResult && data.checklist) {
           renderResult(data);
         }

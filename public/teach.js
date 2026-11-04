@@ -6,10 +6,12 @@
   const form          = document.getElementById('teach-form');
   const generateBtn   = document.getElementById('generate-btn');
   const routinePreview = document.getElementById('routine-preview');
+  const reviewTitle   = document.getElementById('review-title');
   const stepCardsEl   = document.getElementById('step-cards');
   const routineNameEl = document.getElementById('routine-name');
   const saveBtn       = document.getElementById('save-btn');
   const statusMsg     = document.getElementById('status-msg');
+  let generatedSteps = [];
 
   /* ── Photo preview ──────────────────────────────────────── */
   for (let i = 0; i < 4; i++) {
@@ -43,7 +45,6 @@
     div.className = 'error-banner';
 
     const p = document.createElement('p');
-    p.style.margin = '0 0 0.5rem';
     p.textContent = message;
     div.appendChild(p);
 
@@ -71,7 +72,7 @@
 
     const p = document.createElement('p');
     p.textContent =
-      'Sample Mode — using fixture data. Add OPENAI_API_KEY to .env for live inference.';
+      'Sample Mode · These steps come from a prepared example.';
     div.appendChild(p);
 
     const dismiss = document.createElement('button');
@@ -114,6 +115,7 @@
 
   /* ── Render step cards ──────────────────────────────────── */
   function renderStepCards(steps) {
+    generatedSteps = steps;
     stepCardsEl.innerHTML = '';
 
     steps.forEach(function (step, idx) {
@@ -129,7 +131,6 @@
       const inputId = 'step-action-' + idx;
       inputLabel.setAttribute('for', inputId);
       inputLabel.textContent = 'Action text';
-      inputLabel.style.marginTop = '0.4rem';
       card.appendChild(inputLabel);
 
       const actionInput = document.createElement('input');
@@ -137,7 +138,6 @@
       actionInput.id = inputId;
       actionInput.name = 'step_action_' + idx;
       actionInput.value = step.action || '';
-      actionInput.setAttribute('data-step-id', step.id);
       card.appendChild(actionInput);
 
       stepCardsEl.appendChild(card);
@@ -147,11 +147,8 @@
   /* ── Collect edited steps from cards ───────────────────── */
   function collectEditedSteps() {
     const inputs = stepCardsEl.querySelectorAll('input[type="text"]');
-    return Array.from(inputs).map(function (input) {
-      return {
-        id:     input.getAttribute('data-step-id'),
-        action: input.value.trim()
-      };
+    return Array.from(inputs).map(function (input, index) {
+      return { ...generatedSteps[index], action: input.value.trim() };
     });
   }
 
@@ -198,7 +195,10 @@
 
         renderStepCards(steps);
         routinePreview.hidden = false;
-        routinePreview.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        reviewTitle.focus();
+        routinePreview.scrollIntoView({ block: 'start' });
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Save Routine';
 
         if (mode === 'sample') {
           showSampleBanner();
@@ -251,11 +251,9 @@
         // Success
         clearStatus();
         const successDiv = document.createElement('div');
-        successDiv.style.cssText =
-          'border:2px solid #1a7a3a;background:#e8f5ec;border-radius:4px;padding:1rem;margin-bottom:1rem;';
+        successDiv.className = 'success-banner';
 
         const successP = document.createElement('p');
-        successP.style.margin = '0 0 0.5rem';
         successP.textContent = 'Routine saved! Go to Resume to use it.';
         successDiv.appendChild(successP);
 
@@ -265,7 +263,8 @@
         successDiv.appendChild(resumeLink);
 
         statusMsg.appendChild(successDiv);
-        statusMsg.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        resumeLink.focus();
+        statusMsg.scrollIntoView({ block: 'start' });
 
         // Disable save button to prevent double-save
         saveBtn.disabled = true;
