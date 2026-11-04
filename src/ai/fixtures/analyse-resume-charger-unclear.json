@@ -1,0 +1,10 @@
+{
+  "observations": [
+    { "stepId": "step_1", "status": "in_bag", "visualReason": "Textbook spine visible inside the open bag" },
+    { "stepId": "step_2", "status": "in_bag", "visualReason": "Notebook cover visible inside the open bag" },
+    { "stepId": "step_3", "status": "unclear", "visualReason": "Charger not visible in the photo" },
+    { "stepId": "step_4", "status": "unclear", "visualReason": "Bag zip not visible in frame" }
+  ],
+  "nextQuestion": "Can you see the laptop charger? Is it in the bag?",
+  "nextAction": null
+}

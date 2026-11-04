@@ -1,0 +1,50 @@
+
+> pick-up-here@1.0.0 test
+> vitest run
+
+
+ RUN  v1.6.1 /Users/amanadhav/.bob/playground
+
+ ✓ tests/logic/nextAction.test.js  (9 tests) 2ms
+ ✓ tests/ai/schema.test.js  (7 tests) 2ms
+stdout | Object.<anonymous> (/Users/amanadhav/.bob/playground/src/ai/index.js:18:11)
+[AI] Sample Mode — set OPENAI_API_KEY in .env for live inference
+
+stdout | Object.<anonymous> (/Users/amanadhav/.bob/playground/src/ai/index.js:18:11)
+[AI] Sample Mode — set OPENAI_API_KEY in .env for live inference
+
+stdout | Server.<anonymous> (/Users/amanadhav/.bob/playground/src/server.js:60:11)
+[server] Pick Up Here running at http://localhost:3000
+
+ ✓ tests/routes/routine.test.js  (6 tests) 18ms
+ ✓ tests/routes/session.test.js  (6 tests) 24ms
+
+⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯
+
+Vitest caught 1 unhandled error during the test run.
+This might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.
+
+⎯⎯⎯⎯⎯ Uncaught Exception ⎯⎯⎯⎯⎯
+Error: listen EADDRINUSE: address already in use :::3000
+ ❯ Server.setupListenHandle [as _listen2] node:net:2008:16
+ ❯ listenInCluster node:net:2065:12
+ ❯ Server.listen node:net:2170:7
+ ❯ app.listen node_modules/express/lib/application.js:635:24
+ ❯ Object.<anonymous> src/server.js:59:5
+ ❯ Module._compile node:internal/modules/cjs/loader:1830:14
+ ❯ Object..js node:internal/modules/cjs/loader:1961:10
+ ❯ Module.load node:internal/modules/cjs/loader:1553:32
+ ❯ Module._load node:internal/modules/cjs/loader:1355:12
+ ❯ wrapModuleLoad node:internal/modules/cjs/loader:255:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { code: 'EADDRINUSE', errno: -48, syscall: 'listen', address: '::', port: 3000 }
+This error originated in "tests/routes/session.test.js" test file. It doesn't mean the error was thrown inside the file itself, but while it was running.
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+
+ Test Files  4 passed (4)
+      Tests  28 passed (28)
+     Errors  1 error
+   Start at  15:45:14
+   Duration  266ms (transform 37ms, setup 0ms, collect 276ms, tests 46ms, environment 0ms, prepare 147ms)
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teach a Routine — Pick Up Here</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <header>
+      <h1>Pick Up Here</h1>
+      <p class="subtitle">Teach a routine</p>
+      <nav aria-label="Site navigation">
+        <a href="index.html">Home</a>
+        <a href="resume.html">Resume a Task</a>
+      </nav>
+    </header>
+
+    <main>
+
+      <!-- Status / banner area -->
+      <div id="status-msg" role="alert" aria-live="polite"></div>
+
+      <!-- ── Upload form ─────────────────────────────────────── -->
+      <form id="teach-form" novalidate>
+
+        <p>Upload four photos that show each step of your routine, then click <strong>Generate Routine</strong>.</p>
+
+        <!-- Step 1 -->
+        <fieldset class="photo-slot">
+          <legend><span class="step-number">Step 1</span></legend>
+
+          <label for="photo_0">Photo for step 1 <span aria-hidden="true">(required)</span></label>
+          <input type="file" id="photo_0" name="photo_0" accept="image/*" aria-required="true" />
+          <img id="preview_0" class="thumbnail" alt="Preview of step 1 photo" hidden />
+
+          <label for="note_0" style="margin-top:0.75rem;">Short note (optional)</label>
+          <input type="text" id="note_0" name="note_0" placeholder="e.g. Put the textbook in first" />
+        </fieldset>
+
+        <!-- Step 2 -->
+        <fieldset class="photo-slot">
+          <legend><span class="step-number">Step 2</span></legend>
+
+          <label for="photo_1">Photo for step 2 <span aria-hidden="true">(required)</span></label>
+          <input type="file" id="photo_1" name="photo_1" accept="image/*" aria-required="true" />
+          <img id="preview_1" class="thumbnail" alt="Preview of step 2 photo" hidden />
+
+          <label for="note_1" style="margin-top:0.75rem;">Short note (optional)</label>
+          <input type="text" id="note_1" name="note_1" placeholder="e.g. Add the pencil case" />
+        </fieldset>
+
+        <!-- Step 3 -->
+        <fieldset class="photo-slot">
+          <legend><span class="step-number">Step 3</span></legend>
+
+          <label for="photo_2">Photo for step 3 <span aria-hidden="true">(required)</span></label>
+          <input type="file" id="photo_2" name="photo_2" accept="image/*" aria-required="true" />
+          <img id="preview_2" class="thumbnail" alt="Preview of step 3 photo" hidden />
+
+          <label for="note_2" style="margin-top:0.75rem;">Short note (optional)</label>
+          <input type="text" id="note_2" name="note_2" placeholder="e.g. Put the charger in the side pocket" />
+        </fieldset>
+
+        <!-- Step 4 -->
+        <fieldset class="photo-slot">
+          <legend><span class="step-number">Step 4</span></legend>
+
+          <label for="photo_3">Photo for step 4 <span aria-hidden="true">(required)</span></label>
+          <input type="file" id="photo_3" name="photo_3" accept="image/*" aria-required="true" />
+          <img id="preview_3" class="thumbnail" alt="Preview of step 4 photo" hidden />
+
+          <label for="note_3" style="margin-top:0.75rem;">Short note (optional)</label>
+          <input type="text" id="note_3" name="note_3" placeholder="e.g. Zip up and check nothing is left" />
+        </fieldset>
+
+        <button type="submit" id="generate-btn" class="btn-primary">Generate Routine</button>
+
+      </form>
+
+      <!-- ── Generated step cards (hidden until generate succeeds) ── -->
+      <section id="routine-preview" hidden aria-label="Generated routine preview">
+
+        <h2>Review and Edit Steps</h2>
+        <p>You can edit any step text before saving.</p>
+
+        <div id="step-cards"></div>
+
+        <div style="margin-top:1.5rem;">
+          <label for="routine-name">Routine name</label>
+          <input type="text" id="routine-name" placeholder="e.g. School bag morning routine" />
+        </div>
+
+        <button type="button" id="save-btn" class="btn-primary" style="margin-top:1rem;">Save Routine</button>
+
+      </section>
+
+    </main>
+
+    <a href="index.html" class="back-link">← Back to home</a>
+
+  </div><!-- /.page-wrapper -->
+
+  <script src="teach.js" defer></script>
+</body>
+</html>

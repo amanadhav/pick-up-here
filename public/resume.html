@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume a Routine — Pick Up Here</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Next-action box ───────────────────────────────────── */
+    #next-action-box {
+      border: 3px solid #1d5fa8;
+      border-radius: 6px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      background: #f0f6ff;
+    }
+
+    #next-action-box .next-action-text {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0 0 0.75rem;
+    }
+
+    #next-action-box .confirm-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+
+    #next-action-box .done-message {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #1a7a3a;
+      margin: 0;
+    }
+
+    /* ── Checklist items ───────────────────────────────────── */
+    .checklist-item {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 0.95rem;
+    }
+
+    .checklist-item:last-child {
+      border-bottom: none;
+    }
+
+    .checklist-item .step-num {
+      font-weight: 700;
+      color: #555;
+      flex-shrink: 0;
+      min-width: 1.8rem;
+    }
+
+    .checklist-item .item-action {
+      flex: 1;
+    }
+
+    .checklist-item .item-reason {
+      display: block;
+      font-size: 0.82rem;
+      color: #57606a;
+      margin-top: 0.15rem;
+    }
+
+    /* ── Sample preset buttons ─────────────────────────────── */
+    #sample-presets {
+      margin-bottom: 1rem;
+      padding: 0.75rem 1rem;
+      border: 2px dashed #e6ac00;
+      border-radius: 6px;
+      background: #fffbf0;
+    }
+
+    #sample-presets p {
+      margin: 0 0 0.5rem;
+      font-size: 0.9rem;
+      color: #5a4600;
+      font-weight: 600;
+    }
+
+    #sample-presets .preset-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /* ── Session buttons ───────────────────────────────────── */
+    .session-controls {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    /* ── Photo preview ─────────────────────────────────────── */
+    #resume-photo-preview {
+      display: block;
+      max-width: 100%;
+      max-height: 120px;
+      margin-top: 0.6rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <header>
+      <h1>Pick Up Here</h1>
+      <p class="subtitle">Resume a routine</p>
+      <nav aria-label="Site navigation">
+        <a href="index.html">Home</a>
+        <a href="teach.html">Teach a Routine</a>
+      </nav>
+    </header>
+
+    <main>
+
+      <!-- Status / banner area -->
+      <div id="resume-status" role="alert" aria-live="polite"></div>
+
+      <!-- ── Select section ───────────────────────────────────── -->
+      <section id="select-section" aria-label="Select routine and upload photo">
+
+        <label for="routine-select">Choose your routine:</label>
+        <select id="routine-select" style="display:block;width:100%;min-height:44px;font-size:1rem;font-family:inherit;padding:0.4rem 0.6rem;border:2px solid #767676;border-radius:4px;background:#fff;color:#1a1a1a;margin-bottom:1rem;">
+          <option value="" disabled selected>— select a routine —</option>
+        </select>
+
+        <!-- Sample Mode preset buttons (shown when no routines exist) -->
+        <div id="sample-presets" hidden>
+          <p>No routines saved yet — try a sample:</p>
+          <div class="preset-btns">
+            <button type="button" id="preset-desk-btn" class="btn-secondary">Sample: Charger on desk</button>
+            <button type="button" id="preset-unclear-btn" class="btn-secondary">Sample: Charger out of view</button>
+          </div>
+        </div>
+
+        <label for="resume-photo">Upload a current photo:</label>
+        <input type="file" id="resume-photo" accept="image/*" aria-describedby="photo-hint" />
+        <span id="photo-hint" style="display:block;font-size:0.85rem;color:#57606a;margin-top:0.2rem;">
+          Optional when using a sample preset.
+        </span>
+        <img id="resume-photo-preview" alt="Preview of uploaded photo" hidden />
+
+        <div style="margin-top:1.25rem;">
+          <button type="button" id="analyse-btn" class="btn-primary">Analyse</button>
+        </div>
+
+      </section>
+
+      <!-- ── Result section (hidden until analysis succeeds) ──── -->
+      <section id="result-section" hidden aria-label="Analysis results">
+
+        <div
+          id="next-action-box"
+          role="region"
+          aria-label="Next action"
+          tabindex="-1"
+        >
+          <!-- Populated by resume.js -->
+        </div>
+
+        <details id="checklist-details" open>
+          <summary id="checklist-summary" style="cursor:pointer;font-weight:600;font-size:1rem;padding:0.4rem 0;">
+            Checklist
+          </summary>
+          <div id="checklist-items" style="margin-top:0.5rem;">
+            <!-- Populated by resume.js -->
+          </div>
+        </details>
+
+        <div class="session-controls">
+          <button type="button" id="new-session-btn" class="btn-secondary">Start New Session</button>
+          <button type="button" id="clear-all-btn" class="btn-secondary">Clear All Session Data</button>
+        </div>
+
+      </section>
+
+    </main>
+
+    <a href="index.html" class="back-link">← Back to home</a>
+
+  </div><!-- /.page-wrapper -->
+
+  <script src="resume.js" defer></script>
+</body>
+</html>

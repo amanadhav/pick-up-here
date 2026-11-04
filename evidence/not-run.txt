@@ -1,0 +1,26 @@
+Tests Not Run
+=============
+
+1. Browser-based E2E tests
+   Status  : NOT RUN
+   Reason  : No headless browser configured — Playwright and Puppeteer are not
+             installed in this project.
+   Impact  : The full Teach → Save → Resume → Confirm flow was validated
+             programmatically via scripts/sample-mode-e2e.js (see
+             evidence/sample-mode-run.txt), but was not verified in a real
+             browser session.
+   Manual  : Manual verification steps are documented in README.md under the
+             "60-Second Demo Script" section.
+
+2. Live inference tests (GPT-4o)
+   Status  : NOT RUN — OPENAI_API_KEY not set
+   Reason  : No OpenAI API key is configured in this environment.
+   Impact  : The live path through src/ai/openai-client.js was not exercised.
+             All 28 automated tests use Sample Mode fixtures, which have the
+             identical response shape and pass the same schema validators.
+   To run  : Set OPENAI_API_KEY in .env and run:
+               node scripts/live-inference-test.js
+             Results will be written to:
+               evidence/live-inference-generate.json
+               evidence/live-inference-resume.json
+   See also: evidence/live-inference-result.txt

@@ -1,0 +1,46 @@
+=== Sample Mode End-to-End Run ===
+Timestamp: 2026-11-04T22:44:52.286Z
+
+STEP 1: POST /api/routine/generate (4 fake photo buffers)
+  HTTP Status: 200
+  Mode: sample
+  Steps returned: 4
+    step_1: Put the textbook in the bag
+    step_2: Put the notebook in the bag
+    step_3: Pack the laptop charger
+    step_4: Zip up the bag
+
+STEP 2: POST /api/routine/save
+  HTTP Status: 200
+  Saved routineId: b25af1f5-2d25-445a-b6f8-21ef0f2bc766
+
+STEP 3: POST /api/session/resume (preset: charger-on-desk)
+  HTTP Status: 200
+  Mode: sample
+  nextResult.type: action
+  nextResult.stepId: step_3
+  nextResult.message: Pack Pack the laptop charger — it appears to be outside the bag.
+
+STEP 4: POST /api/session/confirm { stepId: 'step_3', answer: 'yes' }
+  HTTP Status: 200
+  step_3 confirmation: yes
+  nextResult.type: conflict
+  nextResult.stepId: step_3
+
+STEP 5: POST /api/session/confirm { stepId: 'step_4', answer: 'yes' }
+  HTTP Status: 200
+  step_4 confirmation: yes
+  nextResult.type: conflict
+
+STEP 6: GET /api/session/state
+  HTTP Status: 200
+  Mode: sample
+  nextResult.type: conflict
+
+  Final checklist:
+    step_1: observed=in_bag, confirmed=none
+    step_2: observed=in_bag, confirmed=none
+    step_3: observed=outside_bag, confirmed=yes
+    step_4: observed=unclear, confirmed=yes
+
+=== Sample Mode E2E: PASSED ===

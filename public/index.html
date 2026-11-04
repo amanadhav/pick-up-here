@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pick Up Here</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    nav.home-nav {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    a.card {
+      display: block;
+      padding: 1.25rem 1.5rem;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #1a1a1a;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    a.card:hover, a.card:focus-visible {
+      border-color: #1d5fa8;
+      outline: 3px solid #1d5fa8;
+      outline-offset: 2px;
+    }
+    a.card span.desc {
+      display: block;
+      font-weight: 400;
+      font-size: 0.95rem;
+      color: #444;
+      margin-top: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <header>
+      <h1>Pick Up Here</h1>
+      <p class="subtitle">AI-assisted task resumption — for people who need a helping hand picking up where they left off.</p>
+    </header>
+
+    <main>
+      <nav class="home-nav" aria-label="Main navigation">
+        <a class="card" href="teach.html">
+          Teach a Routine
+          <span class="desc">Show the app how to pack your bag with four photos.</span>
+        </a>
+        <a class="card" href="resume.html">
+          Resume a Task
+          <span class="desc">Upload a fresh photo and see exactly what to do next.</span>
+        </a>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>

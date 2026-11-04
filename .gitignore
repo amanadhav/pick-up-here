@@ -1,0 +1,17 @@
+# Environment secrets — never commit
+.env
+
+# Dependencies
+node_modules/
+
+# In-flight upload staging (if ever written to disk)
+uploads/
+
+# Live inference output — JSON results are regenerated each run
+evidence/*.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

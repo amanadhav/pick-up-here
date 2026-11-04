@@ -1,0 +1,10 @@
+{
+  "observations": [
+    { "stepId": "step_1", "status": "in_bag", "visualReason": "Textbook spine visible inside the open bag" },
+    { "stepId": "step_2", "status": "in_bag", "visualReason": "Notebook cover visible inside the open bag" },
+    { "stepId": "step_3", "status": "outside_bag", "visualReason": "Laptop charger cable coiled on the desk to the right" },
+    { "stepId": "step_4", "status": "unclear", "visualReason": "Bag zip not visible in frame" }
+  ],
+  "nextQuestion": null,
+  "nextAction": "Pack the charger — it is on the desk to the right"
+}

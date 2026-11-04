@@ -1,0 +1,260 @@
+/* ============================================================
+   Pick Up Here — shared stylesheet
+   High-contrast, phone-friendly, keyboard accessible
+   ============================================================ */
+
+/* --- Reset / Base ------------------------------------------ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  background: #ffffff;
+  color: #1a1a1a;
+  margin: 0;
+  padding: 0 1rem 3rem;
+}
+
+.page-wrapper {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* --- Typography -------------------------------------------- */
+h1 {
+  font-size: 1.6rem;
+  margin-bottom: 0.15rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+p.subtitle {
+  color: #444;
+  margin-top: 0;
+  font-size: 0.95rem;
+}
+
+/* --- Header ----------------------------------------------- */
+header {
+  padding: 1.5rem 0 1rem;
+  border-bottom: 2px solid #e5e7eb;
+  margin-bottom: 1.5rem;
+}
+
+header nav {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+}
+
+header nav a {
+  color: #1d5fa8;
+  text-decoration: underline;
+  margin-right: 1.25rem;
+}
+
+/* --- Links ------------------------------------------------- */
+a {
+  color: #1d5fa8;
+}
+
+a:focus {
+  outline: 3px solid #1d5fa8;
+  outline-offset: 2px;
+}
+
+/* --- Focus ring (all focusable elements) ------------------- */
+:focus-visible {
+  outline: 3px solid #1d5fa8;
+  outline-offset: 2px;
+}
+
+/* --- Buttons ---------------------------------------------- */
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 1.25rem;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.btn-primary {
+  background: #1d5fa8;
+  color: #ffffff;
+  border-color: #1d5fa8;
+}
+
+.btn-primary:hover {
+  background: #174d8c;
+  border-color: #174d8c;
+}
+
+.btn-primary:disabled {
+  background: #6699cc;
+  border-color: #6699cc;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #ffffff;
+  color: #1d5fa8;
+  border-color: #1d5fa8;
+}
+
+.btn-secondary:hover {
+  background: #eaf1fb;
+}
+
+/* --- Inputs & Labels -------------------------------------- */
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+input[type="text"],
+input[type="file"] {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  font-size: 1rem;
+  font-family: inherit;
+  padding: 0.4rem 0.6rem;
+  border: 2px solid #767676;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
+input[type="text"]:focus,
+input[type="file"]:focus {
+  border-color: #1d5fa8;
+  outline: 3px solid #1d5fa8;
+  outline-offset: 2px;
+}
+
+/* --- Step card -------------------------------------------- */
+.step-card {
+  border: 2px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.step-card .step-number {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.4rem;
+}
+
+/* --- Photo slot ------------------------------------------- */
+.photo-slot {
+  border: 2px dashed #aaa;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.photo-slot img.thumbnail {
+  display: block;
+  max-width: 100%;
+  max-height: 120px;
+  margin-top: 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* --- Status badges ---------------------------------------- */
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.badge-packed  { background: #1a7a3a; }
+.badge-missing { background: #c0392b; }
+.badge-unclear { background: #9a6000; }
+.badge-unknown { background: #555555; }
+
+/* --- Banners ---------------------------------------------- */
+.sample-mode-banner {
+  background: #fff3cd;
+  color: #1a1a1a;
+  border: 2px solid #e6ac00;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.sample-mode-banner p {
+  margin: 0;
+  flex: 1;
+}
+
+.sample-mode-banner button.dismiss {
+  min-height: 32px;
+  padding: 0 0.6rem;
+  font-size: 0.85rem;
+  background: transparent;
+  border: 2px solid #9a6000;
+  color: #1a1a1a;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.error-banner {
+  background: #fce4e4;
+  color: #1a1a1a;
+  border: 2px solid #c0392b;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* --- Checklist items -------------------------------------- */
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.checklist li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 0.95rem;
+}
+
+.checklist li:last-child {
+  border-bottom: none;
+}
+
+/* --- Back link -------------------------------------------- */
+.back-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+}

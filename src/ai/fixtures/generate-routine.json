@@ -1,0 +1,8 @@
+{
+  "steps": [
+    { "id": "step_1", "action": "Put the textbook in the bag", "photoRef": 0 },
+    { "id": "step_2", "action": "Put the notebook in the bag", "photoRef": 1 },
+    { "id": "step_3", "action": "Pack the laptop charger", "photoRef": 2 },
+    { "id": "step_4", "action": "Zip up the bag", "photoRef": 3 }
+  ]
+}
