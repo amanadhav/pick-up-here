@@ -56,8 +56,11 @@ app.get('/api/routines', (req, res) => {
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // ── Start ─────────────────────────────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`[server] Pick Up Here running at http://localhost:${PORT}`);
-});
+// Only bind the port when this file is run directly (not when imported by tests)
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`[server] Pick Up Here running at http://localhost:${PORT}`);
+  });
+}
 
 module.exports = app; // exported for supertest

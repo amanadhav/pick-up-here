@@ -44,7 +44,7 @@ describe('nextAction()', () => {
     });
     expect(result.type).toBe('question');
     expect(result.stepId).toBe('step_1');
-    expect(result.message).toContain('Can you see');
+    expect(result.message).toContain('Is it already inside?');
   });
 
   it('4. item with no observation → question message', () => {
@@ -56,7 +56,7 @@ describe('nextAction()', () => {
     });
     expect(result.type).toBe('question');
     expect(result.stepId).toBe('step_1');
-    expect(result.message).toContain('Can you see');
+    expect(result.message).toContain('Is it already inside?');
   });
 
   it('5. confirmation no → action message to pack it', () => {
@@ -71,7 +71,7 @@ describe('nextAction()', () => {
     expect(result.message).toContain('not in the bag yet');
   });
 
-  it('6. confirmation unsure → check message', () => {
+  it('6. confirmation unsure → check message with side pocket hint', () => {
     const result = nextAction({
       steps: STEPS,
       observations: {},
@@ -80,7 +80,7 @@ describe('nextAction()', () => {
     });
     expect(result.type).toBe('check');
     expect(result.stepId).toBe('step_1');
-    expect(result.message).toContain('To check');
+    expect(result.message).toContain('side pockets');
   });
 
   it('7. conflict (outside_bag + confirmed yes) → conflict message', () => {

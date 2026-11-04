@@ -1,5 +1,5 @@
 === Sample Mode End-to-End Run ===
-Timestamp: 2026-11-04T22:44:52.286Z
+Timestamp: 2026-11-04T22:54:06.100Z
 
 STEP 1: POST /api/routine/generate (4 fake photo buffers)
   HTTP Status: 200
@@ -12,14 +12,14 @@ STEP 1: POST /api/routine/generate (4 fake photo buffers)
 
 STEP 2: POST /api/routine/save
   HTTP Status: 200
-  Saved routineId: b25af1f5-2d25-445a-b6f8-21ef0f2bc766
+  Saved routineId: 2273a5b2-04fe-4127-9eb7-0e1804138afc
 
 STEP 3: POST /api/session/resume (preset: charger-on-desk)
   HTTP Status: 200
   Mode: sample
   nextResult.type: action
   nextResult.stepId: step_3
-  nextResult.message: Pack Pack the laptop charger — it appears to be outside the bag.
+  nextResult.message: Pack the the laptop charger — it appears to be outside the bag.
 
 STEP 4: POST /api/session/confirm { stepId: 'step_3', answer: 'yes' }
   HTTP Status: 200

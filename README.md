@@ -91,14 +91,14 @@ node scripts/live-inference-test.js
 **Resume with charger out of view:**
 1. Click **Start New Session**
 2. Click **Sample: Charger out of view**
-3. See the result: a question **"Can you see the laptop charger? Is it in the bag?"** with Yes / No / I'm not sure buttons
+3. See the question **"Check your bag for the laptop charger. Is it already inside?"** with Yes / No / I'm not sure buttons
 
 **Confirm answers:**
-1. Click **No** → the next action updates to "Pack the charger — you said it is not in the bag yet."
+1. Click **No** → next action: "Pack the laptop charger — you said it is not in the bag yet."
 2. Click **Start New Session**
 3. Click **Sample: Charger out of view** again
-4. Click **Yes** → the view advances to Step 4 ("Zip up the bag")
-5. Click **I'm not sure** on a step → see a concrete check suggestion
+4. Click **Yes** → step marked complete; view advances to Step 4 ("Zip up the bag")
+5. Click **Start New Session**, click **Sample: Charger out of view** again, click **I'm not sure** → see: "Check your bag for the laptop charger. Try the main compartment and any side pockets."
 
 **Start New Session:**
 1. Click **Start New Session** — the checklist resets, the routine stays available
